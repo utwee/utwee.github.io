@@ -4,32 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles_index.css">
     <title>Meine Webseite</title>
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li><a href="index.html">Startseite</a></li>
-            <li><a href="about.html">Über diese Webseite</a></li>
-            <li><a href="contact.html">Kontakt</a></li>
-            <li><a href="image.html">Bild bearbeiten</a></li>
-            <li><a href="maps.html">Karten</a></li>
-            <li><a href="camera.html">Kamera</a></li>
-        </ul>
-    </nav>
-
     <div id="camera">
         <h2>Kamera</h2>
         <p>Verwenden Sie die Kamera, um Fotos aufzunehmen und zu bearbeiten.</p>
-        <div id="camera-container" class="section_item">
-            <video id="video" autoplay muted></video>
-            <button id="capture-btn">Bild aufnehmen</button>
-            <img id="captured-image" style="display: none;" alt="Captured Image">
-            <button id="download-btn" style="display: none;">Bild speichern</button>
-            <div id="gallery"></div>
-        </div>
+        <video id="video" autoplay muted></video>
+        <button id="capture-btn">Bild aufnehmen</button>
+        <img id="captured-image" style="display: none;" alt="Captured Image">
+        <button id="download-btn" style="display: none;">Bild speichern</button>
     </div>
 
     <script src="camera.js"></script>

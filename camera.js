@@ -1,25 +1,17 @@
-// Reference to video element.
-var video = document.querySelector("#video");
-
-// Ensure cross-browser functionality.
-navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-  .then(stream => video.srcObject = stream)
-  .catch(e => document.querySelector('#camera').innerHTML = "<p>Kamera nicht benutzbar!</p>");
-
-
-  document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     var video = document.getElementById("video");
     var captureBtn = document.getElementById("capture-btn");
     var capturedImage = document.getElementById("captured-image");
     var downloadBtn = document.getElementById("download-btn");
 
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true })
+        navigator.mediaDevices.getUserMedia({ video: true, audio: false })
             .then(function (stream) {
                 video.srcObject = stream;
             })
             .catch(function (error) {
                 console.error("Error accessing camera:", error);
+                document.getElementById('camera').innerHTML = "<p>Kamera nicht benutzbar!</p>";
             });
 
         captureBtn.addEventListener("click", function () {
