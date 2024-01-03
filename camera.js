@@ -2,7 +2,7 @@
 var video = document.querySelector("#video");
 
 // Ensure cross-browser functionality.
-navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+navigator.mediaDevices.getUserMedia({ video: true, audio: false })
   .then(stream => video.srcObject = stream)
   .catch(e => document.querySelector('#camera').innerHTML = "<p>Kamera nicht benutzbar!</p>");
 
