@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles_index.css">
+    <title>Meine Webseite</title>
+</head>
+
+<nav>
+    <ul>
+        <li><a href="index.html">Startseite</a></li>
+        <li><a href="about.html">Über diese Webseite</a></li>
+        <li><a href="contact.html">Kontakt</a></li>
+        <li><a href="image.html">Bild bearbeiten</a></li>
+        <li><a href="maps.html">Karten</a></li>
+        <li><a href="camera.html">Kamera</a></li>
+    </ul>
+</nav>
+
+<div id="image">
+    <h2>Bilder</h2>
+
+    <input type="file" id="imageInput" accept="image/*">
+    <img id="canvasOriginal" style="display: none; max-width: 20%; max-height: 20%;">
+    <button onclick="processImage()">Bild bearbeiten</button>
+    <br>
+    <canvas id="canvas"></canvas>
+
+    <img id="canvasProcessed" style="display: none; max-width: 20%; max-height: 20%;">
+</div>
+
+<script src="image.js"></script>
