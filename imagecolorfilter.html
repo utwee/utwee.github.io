@@ -2,29 +2,31 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles_index.css">
-    <title>Meine Webseite</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles_index.css">
+  <title>Meine Webseite</title>
 </head>
 
-<body>
 
+<body>
   <nav>
     <ul>
-      <li><a href="index.html">Startseite</a></li>
-      <li><a href="about.html">Über diese Webseite</a></li>
-      <li><a href="contact.html">Kontakt</a></li>
-      <li><a href="imageinvert.html">Bild farben umkehren</a></li>
-      <li><a href="imagecomic.html">Bild Comic Filter Schawrz Weiß</a></li>
-      <li><a href="imagecolorfilter.html">Bild Farbfilter</a></li>
-      <li><a href="imageframe.html">Bild Rahmenfarbe</a></li>
-      <li><a href="maps.html">Karten</a></li>
+      <li><a href="index.html">Start</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropbtn">Bild Bearbeitung</a>
+        <div class="dropdown-content">
+          <a href="imageinvert.html">Farben umkehren</a>
+          <a href="imagecomic.html">Comic-Filter S/W</a>
+          <a href="imagecolorfilter.html">Farbfilter</a>
+          <a href="imageframe.html">Rahmen hinzufügen</a>
+        </div>
+      </li>
       <li><a href="camera.html">Kamera</a></li>
-  </ul>
-</nav>
+    </ul>
+  </nav>
 
-<div id="image">
+  <div id="image">
     <h2>Bilder</h2>
 
     <input type="file" id="imageInput" accept="image/*">
@@ -42,102 +44,107 @@
     <label for="blueRange">Blau:</label>
     <input type="range" id="blueRange" min="0" max="255" value="128">
 
-</div>
+  </div>
 
-<script>
-  function ImageEditor(imageUrl, canvasId) {
-    var context = document.getElementById(canvasId).getContext('2d');
-    var image = new Image();
-    var ready = false;
-    var redFilter = 128;
-    var greenFilter = 128;
-    var blueFilter = 128;
+  <script>
+    function ImageEditor(imageUrl, canvasId) {
+      var context = document.getElementById(canvasId).getContext('2d');
+      var image = new Image();
+      var ready = false;
+      var redFilter = 128;
+      var greenFilter = 128;
+      var blueFilter = 128;
 
-    image.onload = () => {
-      document.getElementById(canvasId).width = image.width;
-      document.getElementById(canvasId).height = image.height;
-      context.drawImage(image, 0, 0);
-      ready = true;
-    };
-
-    image.src = imageUrl;
-
-    this.applyColorFilter = function () {
-      if (!ready) {
-        setTimeout(() => this.applyColorFilter(), 100);
-      } else {
-        var image_data = context.getImageData(0, 0, image.width, image.height);
-        var pixel = image_data.data;
-
-        for (var i = 0, n = pixel.length; i < n; i += 4) {
-          // Apply color filter
-          pixel[i] = pixel[i] + (redFilter - 128);      // Red
-          pixel[i + 1] = pixel[i + 1] + (greenFilter - 128);  // Green
-          pixel[i + 2] = pixel[i + 2] + (blueFilter - 128);  // Blue
-        }
-
-        context.putImageData(image_data, 0, 0);
-      }
-    };
-
-    // Setze die Farbfilterwerte basierend auf den Eingabefeldern
-    this.setColorFilter = function (red, green, blue) {
-      redFilter = red;
-      greenFilter = green;
-      blueFilter = blue;
-    };
-  }
-
-  var editor;
-
-  document.getElementById('imageInput').addEventListener('change', function (event) {
-    var file = event.target.files[0];
-
-    if (file) {
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        var originalImage = document.getElementById('canvasOriginal');
-        originalImage.src = e.target.result;
-        originalImage.style.display = 'inline';
-
-        editor = new ImageEditor(originalImage.src, 'canvas');
+      image.onload = () => {
+        document.getElementById(canvasId).width = image.width;
+        document.getElementById(canvasId).height = image.height;
+        context.drawImage(image, 0, 0);
+        ready = true;
       };
 
-      reader.readAsDataURL(file);
-    }
-  });
+      image.src = imageUrl;
 
-  document.getElementById('redRange').addEventListener('input', function () {
-    if (editor) {
-      var redValue = parseInt(this.value);
-      editor.setColorFilter(redValue, editor.greenFilter, editor.blueFilter);
-      editor.applyColorFilter();
-    }
-  });
+      this.applyColorFilter = function () {
+        if (!ready) {
+          setTimeout(() => this.applyColorFilter(), 100);
+        } else {
+          var image_data = context.getImageData(0, 0, image.width, image.height);
+          var pixel = image_data.data;
 
-  document.getElementById('greenRange').addEventListener('input', function () {
-    if (editor) {
-      var greenValue = parseInt(this.value);
-      editor.setColorFilter(editor.redFilter, greenValue, editor.blueFilter);
-      editor.applyColorFilter();
-    }
-  });
+          for (var i = 0, n = pixel.length; i < n; i += 4) {
+            // Apply color filter
+            pixel[i] = pixel[i] + (redFilter - 128);      // Red
+            pixel[i + 1] = pixel[i + 1] + (greenFilter - 128);  // Green
+            pixel[i + 2] = pixel[i + 2] + (blueFilter - 128);  // Blue
+          }
 
-  document.getElementById('blueRange').addEventListener('input', function () {
-    if (editor) {
-      var blueValue = parseInt(this.value);
-      editor.setColorFilter(editor.redFilter, editor.greenFilter, blueValue);
-      editor.applyColorFilter();
-    }
-  });
+          context.putImageData(image_data, 0, 0);
+        }
+      };
 
-  function processImage() {
-    if (editor) {
-      editor.applyColorFilter();
+      // Setze die Farbfilterwerte basierend auf den Eingabefeldern
+      this.setColorFilter = function (red, green, blue) {
+        redFilter = red;
+        greenFilter = green;
+        blueFilter = blue;
+      };
     }
-  }
-</script>
+
+    var editor;
+
+    document.getElementById('imageInput').addEventListener('change', function (event) {
+      var file = event.target.files[0];
+
+      if (file) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          var originalImage = document.getElementById('canvasOriginal');
+          originalImage.src = e.target.result;
+          originalImage.style.display = 'inline';
+
+          editor = new ImageEditor(originalImage.src, 'canvas');
+        };
+
+        reader.readAsDataURL(file);
+      }
+    });
+
+    document.getElementById('redRange').addEventListener('input', function () {
+      if (editor) {
+        var redValue = parseInt(this.value);
+        editor.setColorFilter(redValue, editor.greenFilter, editor.blueFilter);
+        editor.applyColorFilter();
+      }
+    });
+
+    document.getElementById('greenRange').addEventListener('input', function () {
+      if (editor) {
+        var greenValue = parseInt(this.value);
+        editor.setColorFilter(editor.redFilter, greenValue, editor.blueFilter);
+        editor.applyColorFilter();
+      }
+    });
+
+    document.getElementById('blueRange').addEventListener('input', function () {
+      if (editor) {
+        var blueValue = parseInt(this.value);
+        editor.setColorFilter(editor.redFilter, editor.greenFilter, blueValue);
+        editor.applyColorFilter();
+      }
+    });
+
+    function processImage() {
+      if (editor) {
+        editor.applyColorFilter();
+      }
+    }
+  </script>
+
+  <ul class="end-navigation">
+    <li><a href="about.html">Über diese Webseite</a></li>
+    <li><a href="contact.html">Kontakt</a></li>
+  </ul>
 
 </body>
 

@@ -7,6 +7,35 @@ body {
     background-color: #f5f5f5;
 }
 
+.end-navigation {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #333; /* Hintergrundfarbe anpassen */
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+.end-navigation li {
+    margin: 0 10px;
+    display: inline;
+}
+
+.end-navigation a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease-in-out;
+}
+
+.end-navigation a:hover {
+    color: #ecf0f1;
+}
+
+
+
 nav {
     background-color: #333; /* oder #2c3e50 je nach Vorlieben beibehalten */
     color: white;
@@ -109,4 +138,37 @@ img:hover {
         margin: 10px;
         padding: 10px;
     }
+}
+
+/* Dropdown Button */
+.dropdown {
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
 }

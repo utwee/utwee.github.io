@@ -1,4 +1,4 @@
-// Beispiel für Standortzugriff
+// Wird nicht verwendet
 var x = document.getElementById("p_geoloc");
 
 function getLocation() {
