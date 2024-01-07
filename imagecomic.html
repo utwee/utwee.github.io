@@ -9,6 +9,8 @@
 </head>
 
 <body>
+
+  <!--Erstellt eine Menüleiste mit einem Dropdown-Menü-->
   <nav>
     <ul>
       <li><a href="index.html">Start</a></li>
@@ -25,8 +27,12 @@
     </ul>
   </nav>
 
+  <!--Ermöglicht das Bild in ein Schawarz/Weiß Bild im Comic-Stil umzuwandeln.-->
   <div id="image">
-    <h2>Bilder</h2>
+    <h2>Comic-Filter Schwarz/Weiß</h2>
+
+    <p>1. Wähle ein Bild aus und Lade es hoch.</p>
+    <p>2. Klicke auf Comic-Filter anwenden.</p>
 
     <input type="file" id="imageInput" accept="image/*">
     <img id="canvasOriginal" style="display: none; max-width: 20%; max-height: 20%;">
@@ -37,6 +43,7 @@
   </div>
 
   <script>
+    // Inizialisiere Bild als Canvas und inizialisiere Farbfilter
     function ImageEditor(imageUrl, canvasId) {
       var context = document.getElementById(canvasId).getContext('2d');
       var image = new Image();
@@ -51,6 +58,7 @@
 
       image.src = imageUrl;
 
+      //Wende den Farbfilter an, indem die RGB Pixel des Bildes verändert werden, wenn die Durchschnittsfarbe kleiner 128 ist wird das Pixel Schwarz sonst Weiß
       this.applyComicFilter = function () {
         if (!ready) {
           setTimeout(() => this.applyComicFilter(), 100);
@@ -75,6 +83,7 @@
 
     var editor;
 
+    //Ließt das Bild ein und stellt es dar.
     document.getElementById('imageInput').addEventListener('change', function (event) {
       var file = event.target.files[0];
 
@@ -93,13 +102,15 @@
       }
     });
 
+    //Berechnet das bearbeitet Bild
     function processImage() {
       if (editor) {
         editor.applyComicFilter();
       }
     }
   </script>
-
+  
+  <!--Erstellt eine Navigationsleiste am unteren Ende der Internetseite-->
   <ul class="end-navigation">
     <li><a href="about.html">Über diese Webseite</a></li>
     <li><a href="contact.html">Kontakt</a></li>

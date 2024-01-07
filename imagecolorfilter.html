@@ -10,6 +10,8 @@
 
 
 <body>
+
+  <!--Erstellt eine Menüleiste mit einem Dropdown-Menü-->
   <nav>
     <ul>
       <li><a href="index.html">Start</a></li>
@@ -26,12 +28,16 @@
     </ul>
   </nav>
 
+  <!-- Einstellungen für Farbfilter, Button und Bild auswahlt.-->
   <div id="image">
-    <h2>Bilder</h2>
+    <h2>Farbfilter</h2>
+
+    <p>1. Wähle ein Bild aus und Lade es hoch.</p>
+    <p>2. Wähle mit den Slidern wie stark der Filter sein soll. Beachte nicht jedes Bild ist für jede Filtereinstellung geeignet.</p>
 
     <input type="file" id="imageInput" accept="image/*">
     <img id="canvasOriginal" style="display: none; max-width: 20%; max-height: 20%;">
-    <button onclick="processImage()">Farbfilter anwenden</button>
+    <!--<button onclick="processImage()">Farbfilter anwenden</button>-->
     <br>
     <canvas id="canvas"></canvas>
 
@@ -47,6 +53,7 @@
   </div>
 
   <script>
+    // Inizialisiere Bild als Canvas und inizialisiere Farbfilter
     function ImageEditor(imageUrl, canvasId) {
       var context = document.getElementById(canvasId).getContext('2d');
       var image = new Image();
@@ -64,6 +71,7 @@
 
       image.src = imageUrl;
 
+      //Wende den Farbfilter an, indem die RGB Pixel des Bildes um die Filterwerte verändert werden.
       this.applyColorFilter = function () {
         if (!ready) {
           setTimeout(() => this.applyColorFilter(), 100);
@@ -72,7 +80,7 @@
           var pixel = image_data.data;
 
           for (var i = 0, n = pixel.length; i < n; i += 4) {
-            // Apply color filter
+            // Wende den Farbfilter an
             pixel[i] = pixel[i] + (redFilter - 128);      // Red
             pixel[i + 1] = pixel[i + 1] + (greenFilter - 128);  // Green
             pixel[i + 2] = pixel[i + 2] + (blueFilter - 128);  // Blue
@@ -92,6 +100,7 @@
 
     var editor;
 
+    //Liest Bild ein und stellt es dar. 
     document.getElementById('imageInput').addEventListener('change', function (event) {
       var file = event.target.files[0];
 
@@ -110,6 +119,7 @@
       }
     });
 
+    // Aktualisiere Bild bei Bewegung des Sliders (Rot)
     document.getElementById('redRange').addEventListener('input', function () {
       if (editor) {
         var redValue = parseInt(this.value);
@@ -118,6 +128,7 @@
       }
     });
 
+    // Aktualisiere Bild bei Bewegung des Sliders (Grün)
     document.getElementById('greenRange').addEventListener('input', function () {
       if (editor) {
         var greenValue = parseInt(this.value);
@@ -126,6 +137,7 @@
       }
     });
 
+    // Aktualisiere Bild bei Bewegung des Sliders (Blau)
     document.getElementById('blueRange').addEventListener('input', function () {
       if (editor) {
         var blueValue = parseInt(this.value);
@@ -134,6 +146,7 @@
       }
     });
 
+    //Berechne das Bild. 
     function processImage() {
       if (editor) {
         editor.applyColorFilter();
@@ -141,6 +154,7 @@
     }
   </script>
 
+<!--Erstellt eine Navigationsleiste am unteren Ende der Internetseite-->
   <ul class="end-navigation">
     <li><a href="about.html">Über diese Webseite</a></li>
     <li><a href="contact.html">Kontakt</a></li>

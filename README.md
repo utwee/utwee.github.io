@@ -1,6 +1,6 @@
 # Web-App basierend auf HTML, CSS und JavaScript
 
-Diese App wurde angefertigt im Rahmen der Übung.
+Diese App wurde angefertigt im Rahmen der Übung zur Vorlesung "Mobile Computing und Internet der Dinge".
 
 Es werden folgende Funktionen verwendet:
 
@@ -13,7 +13,3 @@ Ein Bild in einen Bild in Schwarz-Weiß Bild im Comic Stil umwandeln.
 Ein Bild mit Farbfilter bearbeiten (nicht für jedes Bild sinnvoll).
 
 Einen Rahmen auf einem Bild einfügen.
-
-Folgende Funktion wurden getestet, wurde aber verworfen. Die Idee war es eine Weltkarte zu Zeigen, auf der der Nutzer seinen Standort sieht.
-
-Andere Ideen basiereten auf der Nutzung des Beschleunigungssensors. Wurde ebenfalls verworfen.

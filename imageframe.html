@@ -10,6 +10,8 @@
 
 
 <body>
+
+  <!--Erstellt eine Menüleiste mit einem Dropdown-Menü-->
   <nav>
     <ul>
       <li><a href="index.html">Start</a></li>
@@ -26,12 +28,16 @@
     </ul>
   </nav>
 
+  <!--Einstellungen für Bilderrahmen Farbe und Bildauswahl.-->
   <div id="image">
-    <h2>Bilder</h2>
+    <h2>Rahmen hinzufügen</h2>
+
+    <p>1. Wähle ein Bild aus und Lade es hoch.</p>
+    <p>2. Wähle eine RGB-Rahmenfarbe und klicke auf Rahmen hinzufügen.</p>
 
     <input type="file" id="imageInput" accept="image/*">
     <img id="canvasOriginal" style="display: none; max-width: 20%; max-height: 20%;">
-    <button onclick="processImage()">Bild mit Rahmen</button>
+    <button onclick="processImage()">Rahmen hinzufügen</button>
     <br>
     <canvas id="canvas"></canvas>
 
@@ -41,6 +47,7 @@
   </div>
 
   <script>
+    // Inizialisiere Bild als Canvas und inizialisiere Farbfilter
     function ImageEditor(imageUrl, canvasId) {
       var context = document.getElementById(canvasId).getContext('2d');
       var image = new Image();
@@ -55,6 +62,7 @@
 
       image.src = imageUrl;
 
+      // Fügt auf Basis der angegebenen Farbe einen  Rahmen der Größe der Größe 20 Pixel. fillRect füllt ein Rechteck bereich des Bildes mit der Angegebenen Farbe.
       this.addFrame = function (frameColor) {
         if (!ready) {
           setTimeout(() => this.addFrame(frameColor), 100);
@@ -84,6 +92,7 @@
 
     var editor;
 
+    //Liest Bild ein und stellt es dar. 
     document.getElementById('imageInput').addEventListener('change', function (event) {
       var file = event.target.files[0];
 
@@ -102,6 +111,7 @@
       }
     });
 
+    //Berechne das Bild.
     function processImage() {
       if (editor) {
         var frameColor = document.getElementById('frameColor').value;
@@ -110,6 +120,7 @@
     }
   </script>
 
+  <!--Erstellt eine Navigationsleiste am unteren Ende der Internetseite-->
   <ul class="end-navigation">
     <li><a href="about.html">Über diese Webseite</a></li>
     <li><a href="contact.html">Kontakt</a></li>

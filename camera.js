@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
+    //Hilfsvariablen
     var video = document.getElementById("video");
     var captureBtn = document.getElementById("capture-btn");
     var capturedImage = document.getElementById("captured-image");
     var downloadBtn = document.getElementById("download-btn");
 
+    // Fordert Zugriff auf die Kamera an und gibt eine Fehlermeldung falls abgelehnt
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: true, audio: false })
             .then(function (stream) {
@@ -14,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById('camera').innerHTML = "<p>Kamera nicht benutzbar!</p>";
             });
 
+        //Erstellt das Bild das von der Camera aufgenommen wurde
         captureBtn.addEventListener("click", function () {
             var canvas = document.createElement("canvas");
             canvas.width = video.videoWidth;
@@ -29,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         downloadBtn.addEventListener("click", function () {
             if (isSafari()) {
-                // Workaround for Safari
+                // Workaround für Safari
                 var popup = window.open();
                 popup.document.write('<img src="' + capturedImage.src + '" />');
             } else {
