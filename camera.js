@@ -5,9 +5,16 @@ document.addEventListener("DOMContentLoaded", function () {
     var capturedImage = document.getElementById("captured-image");
     var downloadBtn = document.getElementById("download-btn");
 
+    const constraints = {
+        video: {
+          facingMode: {
+            exact: 'environment'
+          }
+        }
+      };
     // Fordert Zugriff auf die Kamera an und gibt eine Fehlermeldung falls abgelehnt
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+        navigator.mediaDevices.getUserMedia(constraints)
             .then(function (stream) {
                 video.srcObject = stream;
             })
