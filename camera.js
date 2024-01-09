@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     //Hilfsvariablen
-    var video = document.getElementById("video");
+    var video = document.querySelector("#video");
     var captureBtn = document.getElementById("capture-btn");
     var capturedImage = document.getElementById("captured-image");
     var downloadBtn = document.getElementById("download-btn");
