@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const constraints = {
         video: {
           facingMode: {
-            exact: 'environment'
+            exact: 'user'
           }
         }
       };
